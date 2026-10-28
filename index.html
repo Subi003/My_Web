@@ -13,6 +13,7 @@
             --bg: #07111f;
             --bg-soft: #0d1b2a;
             --panel: rgba(13, 22, 34, 0.7);
+            --panel-strong: rgba(17, 26, 38, 0.9);
             --line: rgba(255, 255, 255, 0.11);
             --text: #edf4ff;
             --muted: #b5c6d9;
@@ -21,12 +22,14 @@
             --accent: #34d399;
             --button-text: #07131d;
             --shadow: rgba(9, 18, 30, 0.55);
+            --particle: rgba(255,255,255,0.9);
         }
 
         body.light-mode {
             --bg: #edf4ff;
             --bg-soft: #dfeafe;
-            --panel: rgba(255, 255, 255, 0.78);
+            --panel: rgba(255, 255, 255, 0.8);
+            --panel-strong: rgba(255, 255, 255, 0.94);
             --line: rgba(15, 23, 42, 0.1);
             --text: #101827;
             --muted: #4a5c72;
@@ -35,6 +38,7 @@
             --accent: #0ea271;
             --button-text: #f9fbff;
             --shadow: rgba(20, 58, 120, 0.12);
+            --particle: rgba(15,23,42,0.45);
         }
 
         * { box-sizing: border-box; }
@@ -45,20 +49,18 @@
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
             background:
-                radial-gradient(circle at top left, rgba(114, 226, 255, 0.19), transparent 28%),
-                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.19), transparent 30%),
+                radial-gradient(circle at top left, rgba(114, 226, 255, 0.18), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.18), transparent 30%),
                 linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 44%, #040b13 100%);
             color: var(--text);
             transition: background 0.3s ease, color 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow-x: hidden;
+            position: relative;
         }
 
         body.light-mode {
             background:
-                radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 28%),
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 28%),
                 radial-gradient(circle at bottom right, rgba(109, 40, 217, 0.12), transparent 32%),
                 linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 52%, #dfeaf6 100%);
         }
@@ -88,11 +90,36 @@
             bottom: -150px;
         }
 
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--particle);
+            opacity: 0.7;
+            box-shadow: 0 0 14px rgba(255,255,255,0.25);
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.2; }
+            50% { transform: translateY(-18px) scale(1.15); opacity: 0.8; }
+            100% { transform: translateY(-36px) scale(0.9); opacity: 0.15; }
+        }
+
         .page-shell {
             position: relative;
             z-index: 1;
             width: min(1180px, calc(100% - 32px));
-            padding: 20px 10px 30px;
+            margin: 0 auto;
+            padding: 20px 10px 28px;
         }
 
         .topbar {
@@ -194,23 +221,26 @@
 
         .hero {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 26px;
             align-items: center;
             padding: 20px 8px 4px;
         }
 
-        .hero-copy {
-            background: rgba(11, 18, 29, 0.52);
+        .hero-copy,
+        .profile-card,
+        .mini-card,
+        .project-card,
+        .feature-strip {
+            background: var(--panel);
             border: 1px solid var(--line);
             border-radius: 28px;
-            padding: 38px 30px;
-            box-shadow: 0 18px 60px var(--shadow);
             backdrop-filter: blur(12px);
+            box-shadow: 0 18px 55px var(--shadow);
         }
 
-        body.light-mode .hero-copy {
-            background: rgba(255, 255, 255, 0.62);
+        .hero-copy {
+            padding: 38px 30px;
         }
 
         .eyebrow {
@@ -239,7 +269,7 @@
 
         h1 {
             margin: 22px 0 18px;
-            font-size: clamp(2.8rem, 4vw, 5rem);
+            font-size: clamp(2.7rem, 4vw, 5rem);
             line-height: 0.98;
             letter-spacing: -0.07em;
         }
@@ -252,7 +282,7 @@
         }
 
         .subtext {
-            margin: 0 0 28px;
+            margin: 0 0 26px;
             max-width: 560px;
             color: var(--muted);
             line-height: 1.75;
@@ -317,16 +347,6 @@
             gap: 18px;
         }
 
-        .profile-card,
-        .mini-card,
-        .feature-card {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: 26px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 18px 55px var(--shadow);
-        }
-
         .profile-card {
             position: relative;
             min-height: 340px;
@@ -362,39 +382,16 @@
             color: #8af0c4;
         }
 
-        .portrait {
+        .profile-photo {
             width: 100%;
-            height: 170px;
+            min-height: 170px;
             border-radius: 22px;
-            display: grid;
-            place-items: center;
             margin-bottom: 18px;
-            background:
-                linear-gradient(180deg, rgba(106,182,255,0.18), rgba(105,74,213,0.18)),
-                radial-gradient(circle at 50% 40%, rgba(132,153,255,0.5), rgba(18,22,35,0.8) 50%, rgba(18,22,35,1) 100%);
             border: 1px solid rgba(255,255,255,0.12);
-            overflow: hidden;
-        }
-
-        body.light-mode .portrait {
-            background:
-                linear-gradient(180deg, rgba(96,165,250,0.14), rgba(168,85,247,0.09)),
-                radial-gradient(circle at 50% 40%, rgba(96,165,250,0.22), rgba(219,234,254,0.8) 45%, rgba(255,255,255,1) 100%);
-            border-color: rgba(59,130,246,0.12);
-        }
-
-        .portrait::before {
-            content: "SB";
-            font-size: 4.2rem;
-            font-weight: 900;
-            letter-spacing: -0.1em;
-            color: rgba(255,255,255,0.9);
-            text-shadow: 0 10px 24px rgba(114,226,255,0.22);
-        }
-
-        body.light-mode .portrait::before {
-            color: rgba(15,23,42,0.8);
-            text-shadow: none;
+            background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80');
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.15);
         }
 
         .profile-meta {
@@ -448,36 +445,137 @@
             text-transform: uppercase;
         }
 
-        .section-grid {
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin: 34px 8px 18px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: clamp(1.5rem, 2vw, 2.2rem);
+            letter-spacing: -0.05em;
+        }
+
+        .section-head span {
+            color: var(--muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 8px;
+        }
+
+        .project-card {
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .project-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, rgba(114,226,255,0.11), rgba(139,92,246,0.16));
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .project-badge {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(114,226,255,0.08);
+            border: 1px solid rgba(114,226,255,0.18);
+            color: var(--primary);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .project-card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .project-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tags span {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 6px 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--muted);
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .project-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .feature-strip {
             margin-top: 26px;
+            padding: 18px 20px;
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
         }
 
-        .feature-card {
-            padding: 24px 20px;
+        .feature-item {
+            padding: 16px 12px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
         }
 
-        .feature-icon {
-            width: 52px;
-            height: 52px;
-            display: grid;
-            place-items: center;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            font-size: 1.4rem;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: linear-gradient(135deg, rgba(114,226,255,0.11), rgba(139,92,246,0.16));
+        .feature-item strong {
+            display: block;
+            font-size: 1.02rem;
+            margin-bottom: 8px;
         }
 
-        .feature-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.18rem;
-        }
-
-        .feature-card p {
-            margin: 0;
+        .feature-item span {
             color: var(--muted);
             line-height: 1.7;
         }
@@ -512,7 +610,8 @@
 
         @media (max-width: 960px) {
             .hero { grid-template-columns: 1fr; }
-            .section-grid { grid-template-columns: 1fr; }
+            .projects-grid,
+            .feature-strip { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 620px) {
@@ -532,10 +631,26 @@
             .button { width: 100%; }
             .profile-meta { flex-direction: column; align-items: flex-start; }
             .stats { grid-template-columns: 1fr; }
+            .section-head { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
+    <div class="particles" aria-hidden="true">
+        <span class="particle" style="top: 8%; left: 12%; animation-duration: 8s;"></span>
+        <span class="particle" style="top: 18%; left: 55%; animation-duration: 10s;"></span>
+        <span class="particle" style="top: 25%; left: 80%; animation-duration: 9s;"></span>
+        <span class="particle" style="top: 38%; left: 18%; animation-duration: 11s;"></span>
+        <span class="particle" style="top: 42%; left: 72%; animation-duration: 12s;"></span>
+        <span class="particle" style="top: 62%; left: 10%; animation-duration: 9.5s;"></span>
+        <span class="particle" style="top: 68%; left: 45%; animation-duration: 10.5s;"></span>
+        <span class="particle" style="top: 74%; left: 82%; animation-duration: 8.5s;"></span>
+        <span class="particle" style="top: 84%; left: 58%; animation-duration: 11.5s;"></span>
+        <span class="particle" style="top: 12%; left: 33%; animation-duration: 9.8s;"></span>
+        <span class="particle" style="top: 54%; left: 92%; animation-duration: 8.2s;"></span>
+        <span class="particle" style="top: 46%; left: 34%; animation-duration: 10.8s;"></span>
+    </div>
+
     <div class="page-shell">
         <header class="topbar">
             <a href="#" class="brand" aria-label="Sudhanshu Bhardwaj home">
@@ -562,8 +677,7 @@
                         into digital experiences.
                     </h1>
                     <p class="subtext">
-                        I'm Sudhanshu Bhardwaj, a creative developer focused on turning concepts into polished, high-impact web experiences.
-                        I enjoy blending product thinking, clean design systems, and modern frontend engineering.
+                        I'm Sudhanshu Bhardwaj, a creative developer focused on turning product ideas into polished, useful, and memorable digital experiences.
                     </p>
 
                     <div class="tag-row" aria-label="Skills and interests">
@@ -581,7 +695,7 @@
                 <aside class="info-panel" aria-label="Profile overview">
                     <div class="profile-card">
                         <div class="profile-badge">Open to work</div>
-                        <div class="portrait" aria-hidden="true"></div>
+                        <div class="profile-photo" aria-label="Profile photo"></div>
                         <div class="profile-meta">
                             <div>
                                 <strong>Sudhanshu Bhardwaj</strong>
@@ -611,24 +725,74 @@
                 </aside>
             </section>
 
-            <section class="section-grid" aria-label="Feature cards">
-                <article class="feature-card">
-                    <div class="feature-icon">✨</div>
-                    <h3>Design-first approach</h3>
-                    <p>Crafting clean interfaces, polished UX patterns, and memorable product experiences that feel modern and premium.</p>
+            <div class="section-head">
+                <h2>Selected work</h2>
+                <span>Recent builds</span>
+            </div>
+
+            <section class="projects-grid" aria-label="Project cards">
+                <article class="project-card">
+                    <div class="project-top">
+                        <div class="project-icon">⚡</div>
+                        <span class="project-badge">AI</span>
+                    </div>
+                    <h3>Universal Connector AI</h3>
+                    <p>Interactive AI-driven interface for streamlined connecting workflows, cleaner user journeys, and fast decision support.</p>
+                    <div class="project-meta">
+                        <div class="project-tags">
+                            <span>AI</span>
+                            <span>UI</span>
+                        </div>
+                        <a class="project-link" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">Open →</a>
+                    </div>
                 </article>
 
-                <article class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Scalable development</h3>
-                    <p>Building responsive web experiences with a strong focus on structure, maintainability, and seamless user flow.</p>
+                <article class="project-card">
+                    <div class="project-top">
+                        <div class="project-icon">💼</div>
+                        <span class="project-badge">Portfolio</span>
+                    </div>
+                    <h3>Personal Portfolio</h3>
+                    <p>A clean and polished portfolio experience designed for showcasing projects, contact details, and professional presence.</p>
+                    <div class="project-meta">
+                        <div class="project-tags">
+                            <span>Design</span>
+                            <span>Web</span>
+                        </div>
+                        <a class="project-link" href="#about">View →</a>
+                    </div>
                 </article>
 
-                <article class="feature-card">
-                    <div class="feature-icon">📞</div>
-                    <h3>Let's connect</h3>
-                    <p>Available for collaborations, product opportunities, and conversations around impactful digital experiences.</p>
+                <article class="project-card">
+                    <div class="project-top">
+                        <div class="project-icon">📄</div>
+                        <span class="project-badge">Resume</span>
+                    </div>
+                    <h3>Professional Resume</h3>
+                    <p>Accessible, structured resume experience with clear summary and professional details for quick review and download.</p>
+                    <div class="project-meta">
+                        <div class="project-tags">
+                            <span>Docs</span>
+                            <span>CV</span>
+                        </div>
+                        <a class="project-link" href="Sudhanshu_Bhardwaj_Resume.pdf" download>Download →</a>
+                    </div>
                 </article>
+            </section>
+
+            <section class="feature-strip" aria-label="Developer strengths">
+                <div class="feature-item">
+                    <strong>Design systems</strong>
+                    <span>Building crisp interfaces with thoughtful spacing, hierarchy, and consistency.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Frontend execution</strong>
+                    <span>High-quality HTML, CSS, and user-centered UX patterns for responsive experiences.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Product thinking</strong>
+                    <span>Turning ideas into experiences that feel intuitive, polished, and conversion-ready.</span>
+                </div>
             </section>
         </main>
 
