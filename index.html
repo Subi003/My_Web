@@ -3,182 +3,595 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>Sudhanshu Bhardwaj | Portfolio</title>
+    <meta name="description" content="Portfolio landing page for Sudhanshu Bhardwaj">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #07111f;
+            --bg-soft: #0d1b2a;
+            --panel: rgba(14, 24, 38, 0.75);
+            --panel-strong: rgba(18, 31, 48, 0.96);
+            --card: rgba(255, 255, 255, 0.06);
+            --line: rgba(255, 255, 255, 0.12);
+            --text: #edf4ff;
+            --muted: #b9c7d8;
+            --primary: #72e2ff;
+            --secondary: #8b5cf6;
+            --accent: #34d399;
+            --shadow: rgba(28, 145, 255, 0.35);
+            --glow: rgba(114, 226, 255, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(114, 226, 255, 0.22), transparent 26%),
+                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.2), transparent 30%),
+                linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 45%, #050b14 100%);
+            color: var(--text);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-            color: #fff;
-            overflow: hidden;
-            animation: fadeIn 1s ease-in;
+            overflow-x: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #fff;
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: auto;
+            width: 420px;
+            height: 420px;
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
+            filter: blur(80px);
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .particle:nth-child(odd) { animation-delay: 0.5s; }
-        .particle:nth-child(even) { animation-delay: 1s; }
+        body::before {
+            background: rgba(114, 226, 255, 0.24);
+            top: -120px;
+            left: -80px;
+        }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
+        body::after {
+            background: rgba(139, 92, 246, 0.2);
+            bottom: -140px;
+            right: -60px;
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            width: min(1180px, calc(100% - 32px));
+            padding: 26px 22px 18px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 8px 12px 18px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(114, 226, 255, 0.25), rgba(139, 92, 246, 0.28));
+            border: 1px solid var(--line);
+            box-shadow: 0 0 24px rgba(114, 226, 255, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 26px;
+            align-items: center;
+            padding: 22px 8px 8px;
+        }
+
+        .hero-copy {
+            background: rgba(11, 19, 31, 0.52);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 42px 34px;
+            box-shadow: 0 20px 60px rgba(4, 8, 18, 0.35);
+            backdrop-filter: blur(10px);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(114, 226, 255, 0.3);
+            background: rgba(114, 226, 255, 0.08);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(52, 211, 153, 0.8);
         }
 
         h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            margin: 22px 0 18px;
+            font-size: clamp(2.8rem, 4vw, 5rem);
+            line-height: 0.98;
+            letter-spacing: -0.06em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(120deg, var(--text) 0%, #a9d4ff 24%, var(--primary) 52%, #c9a7ff 100%);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            animation: paintReveal 2s ease-out, float 3s ease-in-out infinite;
+            color: transparent;
         }
 
-        @keyframes paintReveal {
-            0% { opacity: 0; transform: translateY(-20px) rotate(-5deg); }
-            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        .subtext {
+            margin: 0 0 28px;
+            max-width: 560px;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
         }
 
-        .button-container {
-            display: grid;
-            gap: 20px;
-            max-width: 400px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .button {
-            display: inline-block;
-            padding: 20px 40px;
-            font-size: 18px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            padding: 0 22px;
+            border-radius: 16px;
             text-decoration: none;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid transparent;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             cursor: pointer;
         }
 
         .button:hover {
-            transform: translateY(-5px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
-        .contact-options {
-            display: none;
+        .button.primary {
+            background: linear-gradient(135deg, var(--primary), #4ec8ff 38%, #8b5cf6 100%);
+            color: #06131d;
+            box-shadow: 0 18px 40px rgba(72, 180, 255, 0.38);
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--line);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+        }
+
+        .info-panel {
+            display: grid;
+            gap: 18px;
+        }
+
+        .profile-card,
+        .mini-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: 0 20px 70px rgba(6, 14, 27, 0.52);
+            backdrop-filter: blur(12px);
+        }
+
+        .profile-card {
+            position: relative;
+            min-height: 340px;
+            padding: 22px;
+            display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
+            justify-content: flex-end;
+            background:
+                linear-gradient(180deg, rgba(16, 27, 43, 0.34), rgba(16, 27, 43, 0.9)),
+                radial-gradient(circle at 30% 20%, rgba(114, 226, 255, 0.24), transparent 22%),
+                linear-gradient(135deg, rgba(16, 27, 43, 0.8), rgba(11, 17, 31, 0.9));
         }
 
-        .contact-options.show {
+        .profile-badge {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.28);
+            color: #8af0c4;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .portrait {
+            width: 100%;
+            height: 170px;
+            border-radius: 22px;
+            background:
+                linear-gradient(180deg, rgba(106, 182, 255, 0.18), rgba(105, 74, 213, 0.18)),
+                radial-gradient(circle at 50% 40%, rgba(132, 153, 255, 0.5), rgba(18, 22, 35, 0.8) 50%, rgba(18, 22, 35, 1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portrait::before {
+            content: "SB";
+            font-size: 4.2rem;
+            font-weight: 900;
+            letter-spacing: -0.1em;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 10px 30px rgba(114, 226, 255, 0.28);
+        }
+
+        .profile-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+
+        .profile-meta strong {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        .profile-meta span {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .mini-card {
+            padding: 18px 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .stat-item {
+            padding: 14px 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            text-align: center;
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 1.35rem;
+            margin-bottom: 6px;
+        }
+
+        .stat-item span {
+            color: var(--muted);
+            font-size: 0.76rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .section-grid {
+            margin-top: 26px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .feature-card {
+            padding: 24px 20px;
+            border-radius: 22px;
+            background: rgba(10, 18, 29, 0.66);
+            border: 1px solid var(--line);
+            box-shadow: 0 18px 50px rgba(3, 9, 18, 0.28);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, rgba(114, 226, 255, 0.12), rgba(139, 92, 246, 0.18));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .contact-dropdown {
+            display: none;
+            margin-top: 14px;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .contact-dropdown.show {
             display: flex;
         }
 
         .sub-button {
-            padding: 15px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
+            display: block;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
             text-decoration: none;
-            color: #fff;
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text);
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         .sub-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            transform: translateY(-1px);
+            border-color: rgba(114, 226, 255, 0.35);
         }
 
         footer {
-            margin-top: 40px;
-            font-size: 14px;
-            opacity: 0.7;
+            padding: 26px 10px 6px;
+            text-align: center;
+            color: rgba(235, 240, 248, 0.75);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .page-shell {
+                width: min(100% - 20px, 1180px);
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-copy {
+                padding: 28px 22px;
+            }
+
+            .cta-row {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .profile-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="page-shell">
+        <header class="topbar">
+            <a href="#" class="brand" aria-label="Sudhanshu Bhardwaj home">
+                <span class="brand-mark">SB</span>
+                <span>Sudhanshu</span>
+            </a>
 
-    <!-- Floating particles -->
-    <div class="particle" style="top: 10%; left: 20%;"></div>
-    <div class="particle" style="top: 20%; left: 80%;"></div>
-    <div class="particle" style="top: 50%; left: 10%;"></div>
-    <div class="particle" style="top: 70%; left: 70%;"></div>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
 
-    <h1>Welcome to My Portfolio</h1>
+        <main>
+            <section class="hero" id="about">
+                <div class="hero-copy">
+                    <div class="eyebrow">Available for work</div>
+                    <h1>
+                        Build <span class="gradient-text">beautiful ideas</span><br>
+                        into digital experiences.
+                    </h1>
+                    <p class="subtext">
+                        I'm Sudhanshu Bhardwaj, a creative developer focused on turning concepts into polished, high-impact web experiences.
+                        I enjoy blending product thinking, clean design systems, and modern frontend engineering.
+                    </p>
 
-    <div class="button-container">
+                    <div class="tag-row" aria-label="Skills and interests">
+                        <span class="tag">AI Products</span>
+                        <span class="tag">Web Design</span>
+                        <span class="tag">Frontend Development</span>
+                    </div>
 
-        <!-- FIXED STREAMLIT BUTTON -->
-        <a href="https://universal-connector-ai.streamlit.app/"
-   class="button"
-   target="_blank">
-   🔗 Live Project Link (Streamlit)
-</a>
+                    <div class="cta-row">
+                        <a class="button primary" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">View Live Project</a>
+                        <a class="button secondary" href="https://github.com/Subi003/" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                    </div>
+                </div>
 
+                <aside class="info-panel" aria-label="Profile overview">
+                    <div class="profile-card">
+                        <div class="profile-badge">Open to work</div>
+                        <div class="portrait" aria-hidden="true"></div>
+                        <div class="profile-meta">
+                            <div>
+                                <strong>Sudhanshu Bhardwaj</strong>
+                                <span>Product-minded developer</span>
+                            </div>
+                            <a href="Sudhanshu_Bhardwaj_Resume.pdf" class="button secondary" download>Resume</a>
+                        </div>
+                    </div>
 
-        <a href="https://github.com/Subi003/"
-           class="button"
-           target="_blank"
-           rel="noopener noreferrer">
-            💻 GitHub Repository
-        </a>
+                    <div class="mini-card" id="projects">
+                        <div style="color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;">Quick snapshot</div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <strong>3+</strong>
+                                <span>Years</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>12</strong>
+                                <span>Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>99%</strong>
+                                <span>Focus</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </section>
 
-        <a href="Sudhanshu_Bhardwaj_Resume.pdf"
-           class="button"
-           download>
-            📄 Resume Download
-        </a>
+            <section class="section-grid" aria-label="Feature cards">
+                <article class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Design-first approach</h3>
+                    <p>Crafting clean interfaces, polished UX patterns, and memorable product experiences that feel modern and premium.</p>
+                </article>
 
-        <div class="button" onclick="toggleContactOptions()">
-            📞 Contact Details
-            <div class="contact-options" id="contact-options">
-                <a href="tel:+918532945649" class="sub-button">
-                    📞 Call: +91 8532945649
-                </a>
-                <a href="mailto:subibhardwaj03@gmail.com?subject=Contact&body=Hello," 
-                   class="sub-button">
-                    📧 Email: subibhardwaj03@gmail.com
-                </a>
+                <article class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Scalable development</h3>
+                    <p>Building responsive web experiences with a strong focus on structure, maintainability, and seamless user flow.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>Let's connect</h3>
+                    <p>Available for collaborations, product opportunities, and conversations around impactful digital experiences.</p>
+                </article>
+            </section>
+        </main>
+
+        <footer id="contact">
+            <div class="cta-row" style="justify-content: center; margin-bottom: 18px;">
+                <button class="button secondary" type="button" onclick="toggleContactOptions()">Contact Details</button>
             </div>
-        </div>
 
+            <div class="contact-dropdown" id="contact-options">
+                <a href="tel:+918532945649" class="sub-button">📞 Call: +91 8532945649</a>
+                <a href="mailto:subibhardwaj03@gmail.com?subject=Contact&body=Hello," class="sub-button">📧 Email: subibhardwaj03@gmail.com</a>
+            </div>
+
+            <div style="margin-top: 18px;">Designed with ❤️ for a creative experience</div>
+        </footer>
     </div>
-
-    <footer>Designed with ❤️ for a creative experience</footer>
 
     <script>
         function toggleContactOptions() {
@@ -186,6 +599,5 @@
             options.classList.toggle('show');
         }
     </script>
-
 </body>
 </html>
