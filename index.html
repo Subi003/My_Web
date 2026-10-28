@@ -23,6 +23,7 @@
             --button-text: #07131d;
             --shadow: rgba(9, 18, 30, 0.55);
             --particle: rgba(255,255,255,0.9);
+            --soft-bg: #dfe9f7;
         }
 
         body.light-mode {
@@ -39,6 +40,7 @@
             --button-text: #f9fbff;
             --shadow: rgba(20, 58, 120, 0.12);
             --particle: rgba(15,23,42,0.45);
+            --soft-bg: #dfe9f7;
         }
 
         * { box-sizing: border-box; }
@@ -65,61 +67,12 @@
                 linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 52%, #dfeaf6 100%);
         }
 
-        body::before,
-        body::after {
-            content: "";
-            position: fixed;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.42;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body::before {
-            background: rgba(114, 226, 255, 0.23);
-            top: -120px;
-            left: -90px;
-        }
-
-        body::after {
-            background: rgba(139, 92, 246, 0.22);
-            right: -80px;
-            bottom: -150px;
-        }
-
-        .particles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--particle);
-            opacity: 0.7;
-            box-shadow: 0 0 14px rgba(255,255,255,0.25);
-            animation: floatParticle linear infinite;
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(0) scale(0.8); opacity: 0.2; }
-            50% { transform: translateY(-18px) scale(1.15); opacity: 0.8; }
-            100% { transform: translateY(-36px) scale(0.9); opacity: 0.15; }
-        }
-
         .page-shell {
             position: relative;
             z-index: 1;
-            width: min(1180px, calc(100% - 32px));
+            width: min(1160px, calc(100% - 28px));
             margin: 0 auto;
-            padding: 20px 10px 28px;
+            padding: 22px 8px 28px;
         }
 
         .topbar {
@@ -127,7 +80,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 16px;
-            padding: 8px 12px 20px;
+            padding: 8px 10px 18px;
         }
 
         .brand {
@@ -224,12 +177,11 @@
             grid-template-columns: 1.1fr 0.9fr;
             gap: 26px;
             align-items: center;
-            padding: 20px 8px 4px;
+            padding: 8px 8px 4px;
         }
 
         .hero-copy,
         .profile-card,
-        .mini-card,
         .project-card,
         .feature-strip {
             background: var(--panel);
@@ -240,7 +192,11 @@
         }
 
         .hero-copy {
-            padding: 38px 30px;
+            padding: 34px 28px;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .eyebrow {
@@ -256,6 +212,7 @@
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
+            width: fit-content;
         }
 
         .eyebrow::before {
@@ -269,8 +226,8 @@
 
         h1 {
             margin: 22px 0 18px;
-            font-size: clamp(2.7rem, 4vw, 5rem);
-            line-height: 0.98;
+            font-size: clamp(2.6rem, 4vw, 4.7rem);
+            line-height: 0.95;
             letter-spacing: -0.07em;
         }
 
@@ -292,8 +249,8 @@
         .tag-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 26px;
+            gap: 10px;
+            margin-bottom: 22px;
         }
 
         .tag {
@@ -305,20 +262,20 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
             color: var(--muted);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
 
         .cta-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 14px;
         }
 
         .button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 54px;
+            min-height: 52px;
             padding: 0 22px;
             text-decoration: none;
             cursor: pointer;
@@ -342,14 +299,9 @@
             color: var(--text);
         }
 
-        .info-panel {
-            display: grid;
-            gap: 18px;
-        }
-
         .profile-card {
             position: relative;
-            min-height: 340px;
+            min-height: 320px;
             padding: 18px 20px 20px;
             display: flex;
             flex-direction: column;
@@ -416,17 +368,9 @@
             color: #1a2333;
         }
 
-        body.light-mode .profile-meta strong {
-            color: #1a2333;
-        }
-
         .profile-meta span {
             color: rgba(26, 35, 51, 0.72);
             font-size: 1.02rem;
-        }
-
-        body.light-mode .profile-meta span {
-            color: rgba(26, 35, 51, 0.7);
         }
 
         .profile-card .button.secondary {
@@ -436,44 +380,12 @@
             min-width: 160px;
         }
 
-        .mini-card {
-            padding: 18px 20px;
-        }
-
-        .stats {
-            margin-top: 16px;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .stat-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 14px 10px;
-            text-align: center;
-        }
-
-        .stat-item strong {
-            display: block;
-            font-size: 1.35rem;
-            margin-bottom: 6px;
-        }
-
-        .stat-item span {
-            color: var(--muted);
-            font-size: 0.75rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
         .section-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 12px;
-            margin: 34px 8px 18px;
+            margin: 28px 8px 14px;
         }
 
         .section-head h2 {
@@ -491,13 +403,13 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin-top: 8px;
         }
 
         .project-card {
-            padding: 22px 20px;
+            padding: 24px 22px;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -535,7 +447,7 @@
 
         .project-card h3 {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.24rem;
         }
 
         .project-card p {
@@ -578,7 +490,7 @@
         }
 
         .feature-strip {
-            margin-top: 26px;
+            margin-top: 22px;
             padding: 18px 20px;
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -653,27 +565,11 @@
             .cta-row { flex-direction: column; }
             .button { width: 100%; }
             .profile-meta { flex-direction: column; align-items: flex-start; }
-            .stats { grid-template-columns: 1fr; }
             .section-head { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
-    <div class="particles" aria-hidden="true">
-        <span class="particle" style="top: 8%; left: 12%; animation-duration: 8s;"></span>
-        <span class="particle" style="top: 18%; left: 55%; animation-duration: 10s;"></span>
-        <span class="particle" style="top: 25%; left: 80%; animation-duration: 9s;"></span>
-        <span class="particle" style="top: 38%; left: 18%; animation-duration: 11s;"></span>
-        <span class="particle" style="top: 42%; left: 72%; animation-duration: 12s;"></span>
-        <span class="particle" style="top: 62%; left: 10%; animation-duration: 9.5s;"></span>
-        <span class="particle" style="top: 68%; left: 45%; animation-duration: 10.5s;"></span>
-        <span class="particle" style="top: 74%; left: 82%; animation-duration: 8.5s;"></span>
-        <span class="particle" style="top: 84%; left: 58%; animation-duration: 11.5s;"></span>
-        <span class="particle" style="top: 12%; left: 33%; animation-duration: 9.8s;"></span>
-        <span class="particle" style="top: 54%; left: 92%; animation-duration: 8.2s;"></span>
-        <span class="particle" style="top: 46%; left: 34%; animation-duration: 10.8s;"></span>
-    </div>
-
     <div class="page-shell">
         <header class="topbar">
             <a href="#" class="brand" aria-label="Sudhanshu Bhardwaj home">
@@ -727,28 +623,10 @@
                             <a href="Sudhanshu_Bhardwaj_Resume.pdf" class="button secondary" download>Resume</a>
                         </div>
                     </div>
-
-                    <div class="mini-card" id="projects">
-                        <div style="color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;">Quick snapshot</div>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <strong>3+</strong>
-                                <span>Years</span>
-                            </div>
-                            <div class="stat-item">
-                                <strong>12</strong>
-                                <span>Projects</span>
-                            </div>
-                            <div class="stat-item">
-                                <strong>99%</strong>
-                                <span>Focus</span>
-                            </div>
-                        </div>
-                    </div>
                 </aside>
             </section>
 
-            <div class="section-head">
+            <div class="section-head" id="projects">
                 <h2>Selected work</h2>
                 <span>Recent builds</span>
             </div>
@@ -767,22 +645,6 @@
                             <span>UI</span>
                         </div>
                         <a class="project-link" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">Open →</a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon">💼</div>
-                        <span class="project-badge">Portfolio</span>
-                    </div>
-                    <h3>Personal Portfolio</h3>
-                    <p>A clean and polished portfolio experience designed for showcasing projects, contact details, and professional presence.</p>
-                    <div class="project-meta">
-                        <div class="project-tags">
-                            <span>Design</span>
-                            <span>Web</span>
-                        </div>
-                        <a class="project-link" href="#about">View →</a>
                     </div>
                 </article>
 
