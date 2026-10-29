@@ -95,27 +95,19 @@
         }
 
         .brand-mark {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             display: grid;
             place-items: center;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid rgba(87, 108, 146, 0.22);
             background: linear-gradient(135deg, rgba(176, 197, 255, 0.95), rgba(228, 236, 255, 0.9));
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 8px 20px rgba(86, 118, 176, 0.18);
-            font-size: 0.8rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 12px 28px rgba(86, 118, 176, 0.18);
+            font-size: 0.82rem;
             font-weight: 900;
             letter-spacing: -0.12em;
             color: rgba(15, 23, 42, 0.9);
             line-height: 1;
-        }
-
-        .brand-mark img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: contain;
-            padding: 6px;
         }
 
         .nav-group {
@@ -356,24 +348,19 @@
         }
 
         .profile-monogram {
-            width: 135px;
-            height: 135px;
-            border-radius: 26px;
+            width: 148px;
+            height: 148px;
+            border-radius: 30px;
             display: grid;
             place-items: center;
             background: linear-gradient(135deg, rgba(176, 197, 255, 0.95), rgba(228, 236, 255, 0.9));
             border: 1px solid rgba(100, 121, 156, 0.18);
             color: rgba(15, 23, 42, 0.9);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 10px 24px rgba(83, 109, 160, 0.12);
-            overflow: hidden;
-        }
-
-        .profile-monogram img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: contain;
-            padding: 10px;
+            font-size: 4.35rem;
+            font-weight: 900;
+            letter-spacing: -0.14em;
+            line-height: 0.8;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 14px 28px rgba(83, 109, 160, 0.14);
         }
 
         .profile-meta {
@@ -516,70 +503,68 @@
 
         .feature-strip {
             margin-top: 22px;
-            padding: 18px 20px;
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
+            padding: 18px 20px;
         }
 
         .feature-item {
-            padding: 16px 12px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .feature-item strong {
-            display: block;
-            font-size: 1.02rem;
-            margin-bottom: 8px;
-        }
-
-        .feature-item span {
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        footer {
-            text-align: center;
-            padding: 26px 10px 0;
-            color: rgba(235,240,248,0.75);
-            font-size: 0.9rem;
-        }
-
-        body.light-mode footer {
-            color: rgba(15, 23, 42, 0.8);
-        }
-
-        .contact-dropdown {
-            display: none;
-            margin-top: 14px;
+            padding: 10px 8px;
+            display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .contact-dropdown.show {
+        .feature-item strong {
+            font-size: 1rem;
+        }
+
+        .feature-item span {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            padding: 34px 8px 6px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 0.9rem;
         }
 
-        .sub-button {
-            display: block;
-            padding: 12px 16px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.06);
-            background: rgba(255,255,255,0.03);
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--muted);
             text-decoration: none;
-            color: var(--text);
         }
 
-        @media (max-width: 960px) {
-            .hero { grid-template-columns: 1fr; }
-            .projects-grid,
-            .feature-strip { grid-template-columns: 1fr; }
+        .footer-links a:hover { color: var(--text); }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                min-height: 0;
+            }
         }
 
-        @media (max-width: 620px) {
-            .page-shell { width: min(100% - 20px, 1180px); }
+        @media (max-width: 640px) {
+            .page-shell {
+                width: min(100% - 18px, 1160px);
+            }
+
             .topbar {
                 flex-direction: column;
                 align-items: flex-start;
@@ -604,9 +589,7 @@
     <div class="page-shell">
         <header class="topbar">
             <a href="#" class="brand" aria-label="Sudhanshu Bhardwaj home">
-                <span class="brand-mark" aria-label="SB monogram">
-                    <img src="assets/sb-logo.svg" alt="SB logo" />
-                </span>
+                <span class="brand-mark">SB</span>
                 <span>Sudhanshu</span>
             </a>
 
@@ -648,9 +631,7 @@
                     <div class="profile-card">
                         <div class="profile-badge">Open to work</div>
                         <div class="profile-wrap">
-                            <div class="profile-monogram" aria-label="SB monogram">
-                                <img src="assets/sb-logo.svg" alt="SB logo" />
-                            </div>
+                            <div class="profile-monogram" aria-label="Profile initials">SB</div>
                             <div class="profile-meta">
                                 <strong>Sudhanshu Bhardwaj</strong>
                                 <span>Product-minded developer</span>
@@ -670,14 +651,15 @@
                 <article class="project-card">
                     <div class="project-top">
                         <div class="project-icon">⚡</div>
-                        <span class="project-badge">AI</span>
+                        <span class="project-badge">Featured</span>
                     </div>
                     <h3>Universal Connector AI</h3>
-                    <p>Interactive AI-driven interface for streamlined connecting workflows, cleaner user journeys, and fast decision support.</p>
+                    <p>AI-powered platform for fast, connected workflows and product discovery experiences.</p>
                     <div class="project-meta">
                         <div class="project-tags">
                             <span>AI</span>
                             <span>UI</span>
+                            <span>Automation</span>
                         </div>
                         <a class="project-link" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">Open →</a>
                     </div>
@@ -685,77 +667,61 @@
 
                 <article class="project-card">
                     <div class="project-top">
-                        <div class="project-icon">📄</div>
-                        <span class="project-badge">Resume</span>
+                        <div class="project-icon">🧠</div>
+                        <span class="project-badge">Case Study</span>
                     </div>
-                    <h3>Professional Resume</h3>
-                    <p>Accessible, structured resume experience with clear summary and professional details for quick review and download.</p>
+                    <h3>Product Thinking System</h3>
+                    <p>Design strategy framework that blends product intuition, UX clarity, and measurable outcomes.</p>
                     <div class="project-meta">
                         <div class="project-tags">
-                            <span>Docs</span>
-                            <span>CV</span>
+                            <span>Research</span>
+                            <span>UX</span>
+                            <span>Systems</span>
                         </div>
-                        <a class="project-link" href="Sudhanshu_Bhardwaj_Resume.pdf" download>Download →</a>
+                        <a class="project-link" href="#" aria-label="Product thinking system details">View →</a>
                     </div>
                 </article>
             </section>
 
-            <section class="feature-strip" aria-label="Developer strengths">
+            <div class="feature-strip" aria-label="Core strengths">
                 <div class="feature-item">
-                    <strong>Design systems</strong>
-                    <span>Building crisp interfaces with thoughtful spacing, hierarchy, and consistency.</span>
+                    <strong>Product-first execution</strong>
+                    <span>Turning ambiguous product ideas into crisp, user-centered interfaces.</span>
                 </div>
                 <div class="feature-item">
-                    <strong>Frontend execution</strong>
-                    <span>High-quality HTML, CSS, and user-centered UX patterns for responsive experiences.</span>
+                    <strong>Design + development</strong>
+                    <span>Bridging UX polish with implementation discipline for high-trust experiences.</span>
                 </div>
                 <div class="feature-item">
-                    <strong>Product thinking</strong>
-                    <span>Turning ideas into experiences that feel intuitive, polished, and conversion-ready.</span>
+                    <strong>High-velocity iteration</strong>
+                    <span>Shipping quick prototypes and refining them around signal, not guesswork.</span>
                 </div>
-            </section>
+            </div>
         </main>
 
         <footer id="contact">
-            <div class="cta-row" style="justify-content: center; margin-bottom: 18px;">
-                <button class="button secondary" type="button" onclick="toggleContactOptions()">Contact Details</button>
+            <span>© 2025 Sudhanshu Bhardwaj</span>
+            <div class="footer-links">
+                <a href="https://github.com/Subi003" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:sudhanshu@example.com">Email</a>
             </div>
-
-            <div class="contact-dropdown" id="contact-options">
-                <a href="tel:+918532945649" class="sub-button">📞 Call: +91 8532945649</a>
-                <a href="mailto:subibhardwaj03@gmail.com?subject=Contact&body=Hello," class="sub-button">📧 Email: subibhardwaj03@gmail.com</a>
-            </div>
-
-            <div style="margin-top: 18px;">Designed with ❤️ for a creative experience</div>
         </footer>
     </div>
 
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const toggle = document.getElementById('themeToggle');
+        const body = document.body;
 
-        function applyTheme(theme) {
-            const isLightMode = theme === 'light';
-            document.body.classList.toggle('light-mode', isLightMode);
-            localStorage.setItem('theme', theme);
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'light') {
+            body.classList.add('light-mode');
         }
 
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            applyTheme(savedTheme);
-        } else if (!prefersDark.matches) {
-            applyTheme('light');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const isLight = document.body.classList.contains('light-mode');
-            applyTheme(isLight ? 'dark' : 'light');
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
-
-        function toggleContactOptions() {
-            const options = document.getElementById('contact-options');
-            options.classList.toggle('show');
-        }
     </script>
 </body>
 </html>
