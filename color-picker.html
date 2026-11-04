@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>Portfolio Color Picker</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f;
+      --panel: #0d1b2a;
+      --primary: #72e2ff;
+      --secondary: #8b5cf6;
+      --text: #edf4ff;
+      --muted: #b5c6d9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 18px;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      font: 16px/1.5 Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at top left, color-mix(in srgb, var(--primary) 18%, transparent), transparent 32%),
+                  radial-gradient(circle at bottom right, color-mix(in srgb, var(--secondary) 20%, transparent), transparent 35%),
+                  var(--bg);
+      transition: background-color .2s ease, color .2s ease;
+    }
+    main { width: min(100%, 760px); }
+    .panel, .preview {
+      border: 1px solid rgb(255 255 255 / 12%);
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--panel) 90%, transparent);
+      box-shadow: 0 18px 55px rgb(0 0 0 / 25%);
+    }
+    .panel { padding: clamp(20px, 5vw, 36px); }
+    h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+    .intro { margin: 0 0 24px; color: var(--muted); }
+    .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgb(255 255 255 / 10%);
+      border-radius: 14px;
+      background: rgb(255 255 255 / 3%);
+    }
+    input[type="color"] { width: 48px; height: 38px; padding: 2px; border: 0; background: transparent; cursor: pointer; }
+    .preview { margin-top: 18px; padding: 24px; }
+    .preview h2 { margin: 0 0 8px; }
+    .preview p { margin: 0 0 18px; color: var(--muted); }
+    .sample-button {
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 12px;
+      color: var(--bg);
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      font: inherit;
+      font-weight: 700;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .actions button, .back-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid rgb(255 255 255 / 16%);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgb(255 255 255 / 5%);
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .actions button:hover, .back-link:hover { background: rgb(255 255 255 / 11%); }
+    .status { min-height: 1.5em; margin: 12px 0 0; color: var(--muted); }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="panel" aria-labelledby="page-title">
+      <h1 id="page-title">Color picker mode</h1>
+      <p class="intro">Adjust the portfolio palette and preview your choices. Colors are saved in this browser.</p>
+      <div class="controls">
+        <label for="bg-color">Background <input id="bg-color" type="color" value="#07111f" data-token="bg"></label>
+        <label for="panel-color">Card background <input id="panel-color" type="color" value="#0d1b2a" data-token="panel"></label>
+        <label for="primary-color">Primary accent <input id="primary-color" type="color" value="#72e2ff" data-token="primary"></label>
+        <label for="secondary-color">Secondary accent <input id="secondary-color" type="color" value="#8b5cf6" data-token="secondary"></label>
+        <label for="text-color">Text <input id="text-color" type="color" value="#edf4ff" data-token="text"></label>
+      </div>
+      <section class="preview" aria-label="Palette preview">
+        <h2>Your portfolio palette</h2>
+        <p>This sample updates immediately as you choose colors.</p>
+        <button class="sample-button" type="button">Accent button</button>
+      </section>
+      <div class="actions">
+        <button id="reset" type="button">Reset palette</button>
+        <button id="copy" type="button">Copy CSS variables</button>
+        <a class="back-link" href="index.html">Back to portfolio</a>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const defaults = { bg: '#07111f', panel: '#0d1b2a', primary: '#72e2ff', secondary: '#8b5cf6', text: '#edf4ff' };
+      const storageKey = 'portfolio-color-picker';
+      const controls = [...document.querySelectorAll('input[data-token]')];
+      const status = document.getElementById('status');
+
+      function applyPalette(palette) {
+        controls.forEach((input) => {
+          const token = input.dataset.token;
+          const value = /^#[0-9a-f]{6}$/i.test(palette[token] || '') ? palette[token] : defaults[token];
+          input.value = value;
+          document.documentElement.style.setProperty(`--${token}`, value);
+        });
+      }
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        applyPalette({ ...defaults, ...saved });
+      } catch {
+        applyPalette(defaults);
+      }
+
+      controls.forEach((input) => input.addEventListener('input', () => {
+        document.documentElement.style.setProperty(`--${input.dataset.token}`, input.value);
+        try {
+          const palette = Object.fromEntries(controls.map((control) => [control.dataset.token, control.value]));
+          localStorage.setItem(storageKey, JSON.stringify(palette));
+        } catch {
+          status.textContent = 'Preview updated, but this browser could not save the palette.';
+          return;
+        }
+        status.textContent = 'Palette saved.';
+      }));
+
+      document.getElementById('reset').addEventListener('click', () => {
+        applyPalette(defaults);
+        try { localStorage.removeItem(storageKey); } catch { /* The preview still resets without storage. */ }
+        status.textContent = 'Default palette restored.';
+      });
+
+      document.getElementById('copy').addEventListener('click', async () => {
+        const css = ':root {\n' + controls.map((input) => `  --${input.dataset.token}: ${input.value};`).join('\n') + '\n}';
+        try {
+          await navigator.clipboard.writeText(css);
+          status.textContent = 'CSS variables copied to the clipboard.';
+        } catch {
+          status.textContent = css;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
