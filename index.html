@@ -67,18 +67,17 @@
                 linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 52%, #dfeaf6 100%);
         }
 
-        /* Gentle staggered entrance for the page's opening content. */
-        @keyframes reveal-up {
-            from { opacity: 0; transform: translateY(22px); }
+        /* A calm, subtle entrance with just a hint of upward movement. */
+        @keyframes soft-reveal {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .page-shell { animation: reveal-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-        .topbar { animation: reveal-up 650ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-        .hero-copy { animation: reveal-up 750ms 160ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-        .profile-card { animation: reveal-up 750ms 280ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+        .topbar { animation: soft-reveal 700ms 60ms ease-out both; }
+        .hero-copy { animation: soft-reveal 800ms 120ms ease-out both; }
+        .profile-card { animation: soft-reveal 800ms 200ms ease-out both; }
         .section-head, .projects-grid, .feature-strip, footer {
-            animation: reveal-up 700ms 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+            animation: soft-reveal 800ms 280ms ease-out both;
         }
 
         @media (prefers-reduced-motion: reduce) {
