@@ -68,6 +68,71 @@
     transform: translateX(3px);
 }
 
+/* Floating WhatsApp contact toggle */
+.whatsapp-toggle {
+    position: fixed;
+    right: max(22px, env(safe-area-inset-right));
+    bottom: max(22px, env(safe-area-inset-bottom));
+    z-index: 20;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: #25d366;
+    box-shadow: 0 8px 26px rgb(37 211 102 / 38%);
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.whatsapp-toggle:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 32px rgb(37 211 102 / 48%);
+}
+
+.whatsapp-toggle:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
+.whatsapp-toggle svg {
+    width: 31px;
+    height: 31px;
+    fill: currentColor;
+}
+
+.whatsapp-toggle-label {
+    position: absolute;
+    right: 70px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: #fff;
+    background: #132234;
+    font: 600 13px/1.2 Inter, system-ui, sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(5px);
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.whatsapp-toggle:hover .whatsapp-toggle-label,
+.whatsapp-toggle:focus-visible .whatsapp-toggle-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 480px) {
+    .whatsapp-toggle {
+        right: max(16px, env(safe-area-inset-right));
+        bottom: max(16px, env(safe-area-inset-bottom));
+        width: 56px;
+        height: 56px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .page-shell .topbar,
     .page-shell .hero-copy,
@@ -81,7 +146,9 @@
 
     .page-shell *,
     .page-shell *::before,
-    .page-shell *::after {
+    .page-shell *::after,
+    .whatsapp-toggle,
+    .whatsapp-toggle-label {
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
     }
@@ -89,7 +156,8 @@
     .page-shell .project-card:hover,
     .page-shell .profile-card:hover,
     .page-shell .button:hover,
-    .page-shell .project-link:hover {
+    .page-shell .project-link:hover,
+    .whatsapp-toggle:hover {
         transform: none;
     }
 }
