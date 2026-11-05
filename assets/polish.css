@@ -1,0 +1,95 @@
+/* Portfolio motion polish: staggered entrance, responsive hover feedback, and reduced-motion support. */
+@keyframes portfolio-enter-up {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes portfolio-enter-down {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -12px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.page-shell .topbar {
+    animation: portfolio-enter-down 650ms cubic-bezier(.2, .75, .25, 1) both !important;
+}
+
+.page-shell .hero-copy {
+    animation: portfolio-enter-up 750ms 100ms cubic-bezier(.2, .75, .25, 1) both !important;
+}
+
+.page-shell .profile-card {
+    animation: portfolio-enter-up 750ms 180ms cubic-bezier(.2, .75, .25, 1) both !important;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.page-shell .section-head,
+.page-shell .projects-grid,
+.page-shell .feature-strip,
+.page-shell footer {
+    animation: portfolio-enter-up 700ms 240ms cubic-bezier(.2, .75, .25, 1) both !important;
+}
+
+.page-shell .project-card {
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.page-shell .project-card:hover,
+.page-shell .profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 60px var(--shadow);
+}
+
+.page-shell .button {
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.page-shell .button:hover {
+    transform: translateY(-3px);
+}
+
+.page-shell .project-link {
+    transition: color 180ms ease, transform 180ms ease;
+}
+
+.page-shell .project-link:hover {
+    color: var(--primary);
+    transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-shell .topbar,
+    .page-shell .hero-copy,
+    .page-shell .profile-card,
+    .page-shell .section-head,
+    .page-shell .projects-grid,
+    .page-shell .feature-strip,
+    .page-shell footer {
+        animation: none !important;
+    }
+
+    .page-shell *,
+    .page-shell *::before,
+    .page-shell *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .page-shell .project-card:hover,
+    .page-shell .profile-card:hover,
+    .page-shell .button:hover,
+    .page-shell .project-link:hover {
+        transform: none;
+    }
+}
