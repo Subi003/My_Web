@@ -11,47 +11,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/polish.css">
     <style>
-        :root {
-            --bg: #07111f; --bg-soft: #0d1b2a; --panel: rgba(13,22,34,.7);
-            --line: rgba(255,255,255,.11); --text: #edf4ff; --muted: #b5c6d9;
-            --primary: #72e2ff; --secondary: #8b5cf6; --accent: #34d399;
-            --button-text: #07131d; --shadow: rgba(9,18,30,.55);
-        }
-        body.light-mode {
-            --bg: #edf4ff; --bg-soft: #dfeafe; --panel: rgba(255,255,255,.8);
-            --line: rgba(15,23,42,.1); --text: #101827; --muted: #4a5c72;
-            --primary: #0066ff; --secondary: #7c3aed; --accent: #0ea271;
-            --button-text: #f9fbff; --shadow: rgba(20,58,120,.12);
-        }
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            margin: 0; min-height: 100vh; font-family: Inter, sans-serif; color: var(--text);
-            background: radial-gradient(circle at top left,rgba(114,226,255,.18),transparent 28%),
-                radial-gradient(circle at bottom right,rgba(139,92,246,.18),transparent 30%),
-                linear-gradient(135deg,var(--bg) 0%,var(--bg-soft) 44%,#040b13 100%);
-            transition: background .3s ease,color .3s ease; overflow-x: hidden;
-        }
-        body.light-mode { background: radial-gradient(circle at top left,rgba(37,99,235,.12),transparent 28%),
-            radial-gradient(circle at bottom right,rgba(109,40,217,.12),transparent 32%),
-            linear-gradient(135deg,var(--bg) 0%,var(--bg-soft) 52%,#dfeaf6 100%); }
-        @keyframes soft-reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .topbar { animation: soft-reveal 700ms 60ms ease-out both; }
-        .hero-copy { animation: soft-reveal 800ms 120ms ease-out both; }
-        .profile-card { animation: soft-reveal 800ms 200ms ease-out both; }
-        .section-head,.projects-grid,.feature-strip,footer { animation: soft-reveal 800ms 280ms ease-out both; }
-        .page-shell { position: relative; z-index: 1; width: min(1160px,calc(100% - 28px)); margin: auto; padding: 22px 8px 28px; }
-        .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:8px 10px 18px; }
+        :root { --bg:#07111f; --bg-soft:#0d1b2a; --panel:rgba(13,22,34,.7); --line:rgba(255,255,255,.11); --text:#edf4ff; --muted:#b5c6d9; --primary:#72e2ff; --secondary:#8b5cf6; --accent:#34d399; --button-text:#07131d; --shadow:rgba(9,18,30,.55); }
+        body.light-mode { --bg:#edf4ff; --bg-soft:#dfeafe; --panel:rgba(255,255,255,.8); --line:rgba(15,23,42,.1); --text:#101827; --muted:#4a5c72; --primary:#0066ff; --secondary:#7c3aed; --accent:#0ea271; --button-text:#f9fbff; --shadow:rgba(20,58,120,.12); }
+        * { box-sizing:border-box; } html { scroll-behavior:smooth; }
+        body { margin:0; min-height:100vh; font-family:Inter,sans-serif; color:var(--text); background:radial-gradient(circle at top left,rgba(114,226,255,.18),transparent 28%),radial-gradient(circle at bottom right,rgba(139,92,246,.18),transparent 30%),linear-gradient(135deg,var(--bg) 0%,var(--bg-soft) 44%,#040b13 100%); transition:background .3s ease,color .3s ease; overflow-x:hidden; }
+        body.light-mode { background:radial-gradient(circle at top left,rgba(37,99,235,.12),transparent 28%),radial-gradient(circle at bottom right,rgba(109,40,217,.12),transparent 32%),linear-gradient(135deg,var(--bg) 0%,var(--bg-soft) 52%,#dfeaf6 100%); }
+        @keyframes soft-reveal { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+        .topbar { animation:soft-reveal 700ms 60ms ease-out both; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:8px 10px 18px; }
+        .hero-copy { animation:soft-reveal 800ms 120ms ease-out both; } .profile-card { animation:soft-reveal 800ms 200ms ease-out both; }
+        .section-head,.projects-grid,.feature-strip,footer { animation:soft-reveal 800ms 280ms ease-out both; }
+        .page-shell { position:relative; z-index:1; width:min(1160px,calc(100% - 28px)); margin:auto; padding:22px 8px 28px; }
         .brand { display:inline-flex; align-items:center; gap:12px; color:var(--text); text-decoration:none; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
         .brand-mark { width:42px; height:42px; display:grid; place-items:center; border-radius:14px; border:1px solid rgba(87,108,146,.22); background:linear-gradient(135deg,rgba(176,197,255,.95),rgba(228,236,255,.9)); color:#17243a; }
-        .nav-group,.nav-links { display:flex; align-items:center; gap:18px; }
-        .nav-links a,.footer-links a { color:var(--muted); text-decoration:none; transition:color .2s ease; }
-        .nav-links a:hover,.footer-links a:hover { color:var(--text); }
+        .nav-group,.nav-links { display:flex; align-items:center; gap:18px; } .nav-links a,.footer-links a { color:var(--muted); text-decoration:none; transition:color .2s ease; } .nav-links a:hover,.footer-links a:hover { color:var(--text); }
         .theme-toggle { width:54px; height:30px; border:1px solid var(--line); background:rgba(255,255,255,.04); border-radius:999px; position:relative; cursor:pointer; }
-        .theme-toggle::before { content:"☀️"; position:absolute; top:50%; left:27px; transform:translateY(-50%); font-size:.8rem; }
-        .theme-toggle::after { content:""; position:absolute; top:3px; left:30px; width:18px; height:18px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--secondary)); transition:left .2s ease; }
-        body.light-mode .theme-toggle::before { content:"🌙"; left:7px; }
-        body.light-mode .theme-toggle::after { left:4px; }
+        .theme-toggle::before { content:"☀️"; position:absolute; top:50%; left:27px; transform:translateY(-50%); font-size:.8rem; } .theme-toggle::after { content:""; position:absolute; top:3px; left:30px; width:18px; height:18px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--secondary)); transition:left .2s ease; }
+        body.light-mode .theme-toggle::before { content:"🌙"; left:7px; } body.light-mode .theme-toggle::after { left:4px; }
         .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:26px; align-items:center; padding:8px 8px 4px; }
         .hero-copy,.profile-card,.project-card,.feature-strip { background:var(--panel); border:1px solid var(--line); border-radius:28px; backdrop-filter:blur(12px); box-shadow:0 18px 55px var(--shadow); }
         .hero-copy { padding:34px 28px; min-height:320px; display:flex; flex-direction:column; justify-content:center; }
@@ -60,105 +35,87 @@
         h1 { margin:22px 0 18px; font-size:clamp(2.6rem,4vw,4.7rem); line-height:.95; letter-spacing:-.07em; }
         .gradient-text { background:linear-gradient(120deg,var(--text),#a9d4ff 24%,var(--primary) 52%,#c9a7ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
         .subtext { max-width:560px; margin:0 0 26px; color:var(--muted); line-height:1.75; font-size:1.04rem; }
-        .tag-row,.cta-row,.project-tags { display:flex; flex-wrap:wrap; gap:10px; }
-        .tag-row { margin-bottom:22px; }
+        .tag-row,.cta-row,.project-tags { display:flex; flex-wrap:wrap; gap:10px; } .tag-row { margin-bottom:22px; }
         .tag,.project-tags span { display:inline-flex; align-items:center; border-radius:999px; padding:9px 14px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:.8rem; }
-        .button { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 22px; border:1px solid transparent; border-radius:16px; text-decoration:none; cursor:pointer; font:700 .95rem Inter,sans-serif; transition:transform .2s ease; }
-        .button:hover { transform:translateY(-2px); }
-        .button.primary { color:var(--button-text); background:linear-gradient(135deg,var(--primary),#4ec8ff 36%,#8b5cf6); box-shadow:0 18px 40px rgba(72,180,255,.35); }
-        .button.secondary { color:var(--text); background:rgba(255,255,255,.04); border-color:var(--line); }
-        .profile-card { position:relative; min-height:320px; padding:18px 20px 20px; display:flex; flex-direction:column; gap:14px; background:rgba(229,236,249,.74); border-color:rgba(134,154,182,.3); }
-        body.light-mode .profile-card { background:rgba(238,245,255,.82); border-color:rgba(15,23,42,.08); }
+        .button { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 22px; border:1px solid transparent; border-radius:16px; text-decoration:none; cursor:pointer; font:700 .95rem Inter,sans-serif; transition:transform .2s ease; } .button:hover { transform:translateY(-2px); }
+        .button.primary { color:var(--button-text); background:linear-gradient(135deg,var(--primary),#4ec8ff 36%,#8b5cf6); box-shadow:0 18px 40px rgba(72,180,255,.35); } .button.secondary { color:var(--text); background:rgba(255,255,255,.04); border-color:var(--line); }
+        .profile-card { position:relative; min-height:320px; padding:18px 20px 20px; display:flex; flex-direction:column; gap:14px; background:rgba(229,236,249,.74); border-color:rgba(134,154,182,.3); } body.light-mode .profile-card { background:rgba(238,245,255,.82); border-color:rgba(15,23,42,.08); }
         .profile-badge { align-self:flex-end; padding:12px 22px; border-radius:999px; background:#bbe8d9; color:#0b2f2b; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
-        .profile-wrap { display:flex; align-items:center; justify-content:space-between; gap:18px; flex:1; }
-        .profile-monogram { width:148px; height:148px; flex:none; display:grid; place-items:center; border-radius:30px; background:linear-gradient(135deg,rgba(176,197,255,.95),rgba(228,236,255,.9)); color:#17243a; font-size:3rem; font-weight:900; }
-        .profile-meta { display:flex; flex-direction:column; justify-content:center; gap:10px; flex:1; }
-        .profile-meta strong { color:#1a2333; font-size:clamp(1.7rem,2vw,2.3rem); line-height:1.2; letter-spacing:-.06em; }
-        .profile-meta span { color:rgba(26,35,51,.72); font-size:1.02rem; }
+        .profile-wrap { display:flex; align-items:center; justify-content:space-between; gap:18px; flex:1; } .profile-monogram { width:148px; height:148px; flex:none; display:grid; place-items:center; border-radius:30px; background:linear-gradient(135deg,rgba(176,197,255,.95),rgba(228,236,255,.9)); color:#17243a; font-size:3rem; font-weight:900; }
+        .profile-meta { display:flex; flex-direction:column; justify-content:center; gap:10px; flex:1; } .profile-meta strong { color:#1a2333; font-size:clamp(1.7rem,2vw,2.3rem); line-height:1.2; letter-spacing:-.06em; } .profile-meta span { color:rgba(26,35,51,.72); font-size:1.02rem; }
         .profile-card .button.secondary { min-width:140px; margin-left:auto; background:rgba(255,255,255,.34); border-color:rgba(15,23,42,.1); color:#0f1725; }
-        .section-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:28px 8px 14px; }
-        .section-head h2 { margin:0; font-size:clamp(1.5rem,2vw,2.2rem); letter-spacing:-.05em; }
-        .section-head span { color:var(--muted); font-size:.9rem; text-transform:uppercase; letter-spacing:.08em; }
-        .projects-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:8px; }
-        .project-card { padding:24px 22px; display:flex; flex-direction:column; gap:16px; }
-        .project-top,.project-meta { display:flex; justify-content:space-between; align-items:center; gap:14px; }
-        .project-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:14px; font-size:1.2rem; background:linear-gradient(135deg,rgba(114,226,255,.11),rgba(139,92,246,.16)); }
+        .section-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:28px 8px 14px; } .section-head h2 { margin:0; font-size:clamp(1.5rem,2vw,2.2rem); letter-spacing:-.05em; } .section-head span { color:var(--muted); font-size:.9rem; text-transform:uppercase; letter-spacing:.08em; }
+        .projects-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:8px; } .project-card { padding:24px 22px; display:flex; flex-direction:column; gap:16px; }
+        .project-top,.project-meta { display:flex; justify-content:space-between; align-items:center; gap:14px; } .project-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:14px; font-size:1.2rem; background:linear-gradient(135deg,rgba(114,226,255,.11),rgba(139,92,246,.16)); }
         .project-badge { padding:6px 10px; border-radius:999px; background:rgba(114,226,255,.08); border:1px solid rgba(114,226,255,.18); color:var(--primary); font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
-        .project-card h3 { margin:0; font-size:1.24rem; }
-        .project-card p { margin:0; color:var(--muted); line-height:1.7; }
-        .project-meta { margin-top:auto; }
-        .project-tags { gap:8px; }
-        .project-tags span { padding:6px 8px; font-size:.68rem; letter-spacing:.04em; text-transform:uppercase; }
-        .project-link { color:var(--text); text-decoration:none; font-weight:700; }
-        .feature-strip { margin-top:22px; padding:18px 20px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
-        .feature-item { padding:10px 8px; display:flex; flex-direction:column; gap:10px; }
-        .feature-item strong { font-size:1rem; }
-        .feature-item span { color:var(--muted); font-size:.92rem; line-height:1.6; }
-        footer { padding:34px 8px 6px; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted); font-size:.9rem; }
-        .footer-links { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+        .project-card h3 { margin:0; font-size:1.24rem; } .project-card p { margin:0; color:var(--muted); line-height:1.7; } .project-meta { margin-top:auto; } .project-tags { gap:8px; } .project-tags span { padding:6px 8px; font-size:.68rem; letter-spacing:.04em; text-transform:uppercase; } .project-link { color:var(--text); text-decoration:none; font-weight:700; }
+        .feature-strip { margin-top:22px; padding:18px 20px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; } .feature-item { padding:10px 8px; display:flex; flex-direction:column; gap:10px; } .feature-item strong { font-size:1rem; } .feature-item span { color:var(--muted); font-size:.92rem; line-height:1.6; }
+        footer { padding:34px 8px 6px; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted); font-size:.9rem; } .footer-links { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
         @media(max-width:900px) { .hero { grid-template-columns:1fr; } .profile-card { min-height:0; } }
         @media(max-width:640px) { .page-shell { width:min(calc(100% - 18px),1160px); } .topbar { flex-direction:column; align-items:flex-start; } .nav-group { width:100%; justify-content:space-between; } .hero-copy { padding:28px 22px; } .cta-row { flex-direction:column; } .cta-row .button { width:100%; } .profile-wrap { flex-direction:column; align-items:flex-start; } .profile-monogram { width:100%; max-width:160px; } .profile-card .button.secondary { margin-left:0; } .section-head { flex-direction:column; align-items:flex-start; } .feature-strip { grid-template-columns:1fr; } }
+        /* Compact contact popup launcher and panel */
+        .chat-widget { position:fixed; right:max(22px,env(safe-area-inset-right)); bottom:max(94px,calc(env(safe-area-inset-bottom) + 72px)); z-index:21; font-family:Inter,sans-serif; }
+        .chat-widget-toggle { width:56px; height:56px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.2); border-radius:50%; color:#fff; background:#172a42; box-shadow:0 8px 26px rgba(0,0,0,.3); cursor:pointer; font-size:25px; transition:transform 180ms ease,background 180ms ease; }
+        .chat-widget-toggle:hover { transform:translateY(-3px); background:#203b5b; }
+        .chat-widget-toggle:focus-visible,.chat-widget input:focus-visible,.chat-widget button:focus-visible { outline:3px solid #72e2ff; outline-offset:3px; }
+        .chat-widget-panel { position:absolute; right:0; bottom:68px; width:min(340px,calc(100vw - 32px)); padding:18px; border:1px solid var(--line); border-radius:18px; color:var(--text); background:var(--bg-soft); box-shadow:0 18px 55px rgba(0,0,0,.35); opacity:0; visibility:hidden; transform:translateY(8px) scale(.98); transform-origin:bottom right; transition:opacity 180ms ease,transform 180ms ease,visibility 180ms ease; }
+        .chat-widget.is-open .chat-widget-panel { opacity:1; visibility:visible; transform:translateY(0) scale(1); }
+        .chat-widget-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+        .chat-widget-header strong { font-size:1rem; } .chat-widget-close { border:0; color:var(--muted); background:transparent; font-size:1.4rem; cursor:pointer; }
+        .chat-widget-message { margin:0 0 14px; padding:12px; border-radius:12px; color:var(--text); background:rgba(255,255,255,.07); font-size:.9rem; line-height:1.5; }
+        .chat-widget-form { display:flex; gap:8px; } .chat-widget-input { min-width:0; flex:1; padding:11px 12px; border:1px solid var(--line); border-radius:10px; color:var(--text); background:rgba(255,255,255,.05); font:inherit; }
+        .chat-widget-send { padding:0 14px; border:0; border-radius:10px; color:#062313; background:#25d366; font:700 .9rem Inter,sans-serif; cursor:pointer; }
+        @media(max-width:480px) { .chat-widget { right:max(16px,env(safe-area-inset-right)); bottom:max(82px,calc(env(safe-area-inset-bottom) + 66px)); } }
+        @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
     </style>
 </head>
 <body>
     <div class="page-shell">
         <header class="topbar">
             <a href="#" class="brand" aria-label="Sudhanshu Bhardwaj home"><span class="brand-mark">SB</span><span>Sudhanshu</span></a>
-            <div class="nav-group">
-                <nav class="nav-links" aria-label="Main navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
-                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light mode" aria-pressed="false"></button>
-            </div>
+            <div class="nav-group"><nav class="nav-links" aria-label="Main navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light mode" aria-pressed="false"></button></div>
         </header>
         <main>
             <section class="hero" id="about">
-                <div class="hero-copy">
-                    <div class="eyebrow">Available for work</div>
-                    <h1>Build <span class="gradient-text">beautiful ideas</span><br>into digital experiences.</h1>
-                    <p class="subtext">I'm Sudhanshu Bhardwaj, a creative developer focused on turning product ideas into polished, useful, and memorable digital experiences.</p>
-                    <div class="tag-row" aria-label="Skills and interests"><span class="tag">AI Products</span><span class="tag">Web Design</span><span class="tag">Frontend Development</span></div>
-                    <div class="cta-row"><a class="button primary" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">View Live Project</a><a class="button secondary" href="https://github.com/Subi003/" target="_blank" rel="noopener noreferrer">GitHub Profile</a></div>
-                </div>
-                <aside class="info-panel" aria-label="Profile overview">
-                    <div class="profile-card"><div class="profile-badge">Open to work</div><div class="profile-wrap">
-                        <div class="profile-monogram" aria-label="Profile initials">SB</div>
-                        <div class="profile-meta"><strong>Sudhanshu Bhardwaj</strong><span>Product-minded developer</span></div>
-                        <a href="Sudhanshu_Bhardwaj_Resume.pdf" class="button secondary" download>Resume</a>
-                    </div></div>
-                </aside>
+                <div class="hero-copy"><div class="eyebrow">Available for work</div><h1>Build <span class="gradient-text">beautiful ideas</span><br>into digital experiences.</h1><p class="subtext">I'm Sudhanshu Bhardwaj, a creative developer focused on turning product ideas into polished, useful, and memorable digital experiences.</p><div class="tag-row" aria-label="Skills and interests"><span class="tag">AI Products</span><span class="tag">Web Design</span><span class="tag">Frontend Development</span></div><div class="cta-row"><a class="button primary" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">View Live Project</a><a class="button secondary" href="https://github.com/Subi003/" target="_blank" rel="noopener noreferrer">GitHub Profile</a></div></div>
+                <aside class="info-panel" aria-label="Profile overview"><div class="profile-card"><div class="profile-badge">Open to work</div><div class="profile-wrap"><div class="profile-monogram" aria-label="Profile initials">SB</div><div class="profile-meta"><strong>Sudhanshu Bhardwaj</strong><span>Product-minded developer</span></div><a href="Sudhanshu_Bhardwaj_Resume.pdf" class="button secondary" download>Resume</a></div></div></aside>
             </section>
             <div class="section-head" id="projects"><h2>Selected work</h2><span>Recent builds</span></div>
             <section class="projects-grid" aria-label="Project cards">
                 <article class="project-card"><div class="project-top"><div class="project-icon" aria-hidden="true">⚡</div><span class="project-badge">Featured</span></div><h3>Universal Connector AI</h3><p>AI-powered platform for fast, connected workflows and product discovery experiences.</p><div class="project-meta"><div class="project-tags"><span>AI</span><span>UI</span><span>Automation</span></div><a class="project-link" href="https://universal-connector-ai.streamlit.app/" target="_blank" rel="noopener noreferrer">Open →</a></div></article>
                 <article class="project-card"><div class="project-top"><div class="project-icon" aria-hidden="true">🧠</div><span class="project-badge">Case Study</span></div><h3>Product Thinking System</h3><p>Design strategy framework that blends product intuition, UX clarity, and measurable outcomes.</p><div class="project-meta"><div class="project-tags"><span>Research</span><span>UX</span><span>Systems</span></div><a class="project-link" href="https://github.com/Subi003" target="_blank" rel="noopener noreferrer" aria-label="Product thinking system details">View →</a></div></article>
             </section>
-            <section class="feature-strip" aria-label="Core strengths">
-                <div class="feature-item"><strong>Product-first execution</strong><span>Turning ambiguous product ideas into crisp, user-centered interfaces.</span></div>
-                <div class="feature-item"><strong>Design + development</strong><span>Bridging UX polish with implementation discipline for high-trust experiences.</span></div>
-                <div class="feature-item"><strong>High-velocity iteration</strong><span>Shipping quick prototypes and refining them around signal, not guesswork.</span></div>
-            </section>
+            <section class="feature-strip" aria-label="Core strengths"><div class="feature-item"><strong>Product-first execution</strong><span>Turning ambiguous product ideas into crisp, user-centered interfaces.</span></div><div class="feature-item"><strong>Design + development</strong><span>Bridging UX polish with implementation discipline for high-trust experiences.</span></div><div class="feature-item"><strong>High-velocity iteration</strong><span>Shipping quick prototypes and refining them around signal, not guesswork.</span></div></section>
         </main>
         <footer id="contact"><span>© 2026 Sudhanshu Bhardwaj</span><div class="footer-links"><a href="https://github.com/Subi003" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:programmer.cs03@gmail.com">Email</a></div></footer>
     </div>
-    <a class="whatsapp-toggle" href="https://wa.me/917668690613" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-        <span class="whatsapp-toggle-label" aria-hidden="true">Chat with me</span>
-        <svg viewBox="0 0 32 32" role="img" aria-hidden="true"><path d="M16.04 3C8.87 3 3.04 8.78 3.04 15.9c0 2.27.6 4.49 1.74 6.43L3 29l6.88-1.79a13.1 13.1 0 0 0 6.15 1.53h.01c7.16 0 13-5.79 13-12.9 0-3.45-1.36-6.69-3.83-9.13A12.96 12.96 0 0 0 16.04 3Zm0 23.55h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.23-4.08 1.06 1.09-3.96-.25-.4a10.63 10.63 0 0 1-1.64-5.67c0-5.86 4.77-10.63 10.62-10.63 2.83 0 5.49 1.1 7.49 3.11a10.54 10.54 0 0 1 3.1 7.52c0 5.86-4.76 10.65-10.61 10.65Zm5.83-7.98c-.32-.16-1.9-.94-2.2-1.05-.3-.1-.51-.16-.73.16-.22.33-.84 1.05-1.03 1.27-.19.22-.38.24-.7.08-.32-.16-1.36-.5-2.6-1.6-.96-.85-1.61-1.9-1.8-2.22-.19-.33-.02-.5.14-.66.15-.14.32-.38.49-.57.16-.19.22-.33.32-.55.11-.22.06-.41-.02-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55l-.62-.01c-.22 0-.57.08-.87.41-.3.32-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.36c.16.22 2.3 3.5 5.57 4.9.78.34 1.39.54 1.87.69.79.25 1.51.21 2.08.13.63-.1 1.9-.78 2.17-1.54.27-.76.27-1.4.19-1.54-.08-.14-.3-.22-.62-.38Z"/></svg>
-    </a>
+    <div class="chat-widget" id="chatWidget">
+        <section class="chat-widget-panel" id="chatPanel" role="dialog" aria-labelledby="chatTitle" aria-hidden="true">
+            <div class="chat-widget-header"><strong id="chatTitle">Chat with Sudhanshu</strong><button class="chat-widget-close" id="chatClose" type="button" aria-label="Close chat">&times;</button></div>
+            <p class="chat-widget-message">Hi there! Send me a message on WhatsApp and I’ll get back to you.</p>
+            <form class="chat-widget-form" id="chatForm"><label class="sr-only" for="chatMessage">Your message</label><input class="chat-widget-input" id="chatMessage" name="message" type="text" placeholder="Type your message..." autocomplete="off" required><button class="chat-widget-send" type="submit">Send</button></form>
+        </section>
+        <button class="chat-widget-toggle" id="chatToggle" type="button" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">💬</button>
+    </div>
+    <a class="whatsapp-toggle" href="https://wa.me/917668690613" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><span class="whatsapp-toggle-label" aria-hidden="true">Chat with me</span><svg viewBox="0 0 32 32" role="img" aria-hidden="true"><path d="M16.04 3C8.87 3 3.04 8.78 3.04 15.9c0 2.27.6 4.49 1.74 6.43L3 29l6.88-1.79a13.1 13.1 0 0 0 6.15 1.53h.01c7.16 0 13-5.79 13-12.9 0-3.45-1.36-6.69-3.83-9.13A12.96 12.96 0 0 0 16.04 3Zm0 23.55h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.23-4.08 1.06 1.09-3.96-.25-.4a10.63 10.63 0 0 1-1.64-5.67c0-5.86 4.77-10.63 10.62-10.63 2.83 0 5.49 1.1 7.49 3.11a10.54 10.54 0 0 1 3.1 7.52c0 5.86-4.76 10.65-10.61 10.65Zm5.83-7.98c-.32-.16-1.9-.94-2.2-1.05-.3-.1-.51-.16-.73.16-.22.33-.84 1.05-1.03 1.27-.19.22-.38.24-.7.08-.32-.16-1.36-.5-2.6-1.6-.96-.85-1.61-1.9-1.8-2.22-.19-.33-.02-.5.14-.66.15-.14.32-.38.49-.57.16-.19.22-.33.32-.55.11-.22.06-.41-.02-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55l-.62-.01c-.22 0-.57.08-.87.41-.3.32-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.36c.16.22 2.3 3.5 5.57 4.9.78.34 1.39.54 1.87.69.79.25 1.51.21 2.08.13.63-.1 1.9-.78 2.17-1.54.27-.76.27-1.4.19-1.54-.08-.14-.3-.22-.62-.38Z"/></svg></a>
     <script>
-        const toggle = document.getElementById('themeToggle');
+        const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         try {
             const storedTheme = localStorage.getItem('theme');
             if (storedTheme === 'light') body.classList.add('light-mode');
-            toggle.setAttribute('aria-pressed', String(body.classList.contains('light-mode')));
-            toggle.addEventListener('click', () => {
-                body.classList.toggle('light-mode');
-                const isLight = body.classList.contains('light-mode');
-                toggle.setAttribute('aria-pressed', String(isLight));
-                localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            });
-        } catch (error) {
-            toggle.addEventListener('click', () => body.classList.toggle('light-mode'));
-        }
+            themeToggle.setAttribute('aria-pressed', String(body.classList.contains('light-mode')));
+            themeToggle.addEventListener('click', () => { body.classList.toggle('light-mode'); const isLight = body.classList.contains('light-mode'); themeToggle.setAttribute('aria-pressed', String(isLight)); localStorage.setItem('theme', isLight ? 'light' : 'dark'); });
+        } catch (error) { themeToggle.addEventListener('click', () => body.classList.toggle('light-mode')); }
+        const chatWidget = document.getElementById('chatWidget');
+        const chatToggle = document.getElementById('chatToggle');
+        const chatPanel = document.getElementById('chatPanel');
+        const chatInput = document.getElementById('chatMessage');
+        function setChatOpen(isOpen) { chatWidget.classList.toggle('is-open', isOpen); chatToggle.setAttribute('aria-expanded', String(isOpen)); chatToggle.setAttribute('aria-label', isOpen ? 'Close chat' : 'Open chat'); chatPanel.setAttribute('aria-hidden', String(!isOpen)); if (isOpen) chatInput.focus(); }
+        chatToggle.addEventListener('click', () => setChatOpen(!chatWidget.classList.contains('is-open')));
+        document.getElementById('chatClose').addEventListener('click', () => { setChatOpen(false); chatToggle.focus(); });
+        document.getElementById('chatForm').addEventListener('submit', (event) => { event.preventDefault(); const message = chatInput.value.trim(); if (!message) return; window.open(`https://wa.me/917668690613?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer'); });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && chatWidget.classList.contains('is-open')) { setChatOpen(false); chatToggle.focus(); } });
     </script>
 </body>
 </html>
