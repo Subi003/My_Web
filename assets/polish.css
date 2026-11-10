@@ -1,163 +1,25 @@
-/* Portfolio motion polish: staggered entrance, responsive hover feedback, and reduced-motion support. */
-@keyframes portfolio-enter-up {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 18px, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
+/* Ensure the FAQ chat popup stays visible above the portfolio and WhatsApp launcher. */
+.chat-widget {
+    z-index: 1000 !important;
 }
 
-@keyframes portfolio-enter-down {
-    from {
-        opacity: 0;
-        transform: translate3d(0, -12px, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
+.chat-widget-panel {
+    display: none !important;
+    max-height: min(70vh, 520px);
+    overflow-y: auto;
 }
 
-.page-shell .topbar {
-    animation: portfolio-enter-down 650ms cubic-bezier(.2, .75, .25, 1) both !important;
+.chat-widget.is-open .chat-widget-panel {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
 }
 
-.page-shell .hero-copy {
-    animation: portfolio-enter-up 750ms 100ms cubic-bezier(.2, .75, .25, 1) both !important;
+.chat-widget-panel[aria-hidden="true"] {
+    display: none !important;
 }
 
-.page-shell .profile-card {
-    animation: portfolio-enter-up 750ms 180ms cubic-bezier(.2, .75, .25, 1) both !important;
-    transition: transform 220ms ease, box-shadow 220ms ease;
-}
-
-.page-shell .section-head,
-.page-shell .projects-grid,
-.page-shell .feature-strip,
-.page-shell footer {
-    animation: portfolio-enter-up 700ms 240ms cubic-bezier(.2, .75, .25, 1) both !important;
-}
-
-.page-shell .project-card {
-    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
-}
-
-.page-shell .project-card:hover,
-.page-shell .profile-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 24px 60px var(--shadow);
-}
-
-.page-shell .button {
-    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
-}
-
-.page-shell .button:hover {
-    transform: translateY(-3px);
-}
-
-.page-shell .project-link {
-    transition: color 180ms ease, transform 180ms ease;
-}
-
-.page-shell .project-link:hover {
-    color: var(--primary);
-    transform: translateX(3px);
-}
-
-/* Floating WhatsApp contact toggle */
-.whatsapp-toggle {
-    position: fixed;
-    right: max(22px, env(safe-area-inset-right));
-    bottom: max(22px, env(safe-area-inset-bottom));
-    z-index: 20;
-    width: 60px;
-    height: 60px;
-    display: grid;
-    place-items: center;
-    border: 0;
-    border-radius: 50%;
-    color: #fff;
-    background: #25d366;
-    box-shadow: 0 8px 26px rgb(37 211 102 / 38%);
-    text-decoration: none;
-    transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.whatsapp-toggle:hover {
-    transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 12px 32px rgb(37 211 102 / 48%);
-}
-
-.whatsapp-toggle:focus-visible {
-    outline: 3px solid #fff;
-    outline-offset: 4px;
-}
-
-.whatsapp-toggle svg {
-    width: 31px;
-    height: 31px;
-    fill: currentColor;
-}
-
-.whatsapp-toggle-label {
-    position: absolute;
-    right: 70px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    color: #fff;
-    background: #132234;
-    font: 600 13px/1.2 Inter, system-ui, sans-serif;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateX(5px);
-    pointer-events: none;
-    transition: opacity 180ms ease, transform 180ms ease;
-}
-
-.whatsapp-toggle:hover .whatsapp-toggle-label,
-.whatsapp-toggle:focus-visible .whatsapp-toggle-label {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-@media (max-width: 480px) {
-    .whatsapp-toggle {
-        right: max(16px, env(safe-area-inset-right));
-        bottom: max(16px, env(safe-area-inset-bottom));
-        width: 56px;
-        height: 56px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .page-shell .topbar,
-    .page-shell .hero-copy,
-    .page-shell .profile-card,
-    .page-shell .section-head,
-    .page-shell .projects-grid,
-    .page-shell .feature-strip,
-    .page-shell footer {
-        animation: none !important;
-    }
-
-    .page-shell *,
-    .page-shell *::before,
-    .page-shell *::after,
-    .whatsapp-toggle,
-    .whatsapp-toggle-label {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .page-shell .project-card:hover,
-    .page-shell .profile-card:hover,
-    .page-shell .button:hover,
-    .page-shell .project-link:hover,
-    .whatsapp-toggle:hover {
-        transform: none;
-    }
+.chat-widget-panel[aria-hidden="false"] {
+    display: block !important;
 }
