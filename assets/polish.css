@@ -1,15 +1,19 @@
-/* Ensure the FAQ chat popup stays visible above the portfolio and WhatsApp launcher. */
+/* Keep the FAQ assistant above page content and make answers stand out as chat replies. */
 .chat-widget {
     z-index: 1000 !important;
 }
 
 .chat-widget-panel {
     display: none !important;
-    max-height: min(70vh, 520px);
+    width: min(360px, calc(100vw - 32px));
+    max-height: min(72vh, 560px);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
 }
 
-.chat-widget.is-open .chat-widget-panel {
+.chat-widget.is-open .chat-widget-panel,
+.chat-widget-panel[aria-hidden="false"] {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -20,6 +24,27 @@
     display: none !important;
 }
 
-.chat-widget-panel[aria-hidden="false"] {
-    display: block !important;
+.chat-widget-panel .chat-answer {
+    position: relative;
+    min-height: 48px;
+    margin: 0 0 14px;
+    padding: 14px 14px 14px 16px;
+    border: 1px solid rgba(37, 211, 102, .3);
+    border-left: 4px solid #25d366;
+    border-radius: 12px;
+    color: var(--text, #edf4ff);
+    background: rgba(37, 211, 102, .1);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.chat-widget-panel .chat-option {
+    min-height: 44px;
+    line-height: 1.45;
+}
+
+@media (max-width: 480px) {
+    .chat-widget-panel {
+        max-height: min(72dvh, 560px);
+    }
 }
