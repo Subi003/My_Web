@@ -84,11 +84,13 @@
             <p class="chat-widget-message">Hi! Choose a question and I’ll answer it.</p>
             <div class="chat-answer" id="chatAnswer" aria-live="polite">What would you like to know?</div>
             <div class="chat-options" id="chatOptions" aria-label="Choose a question">
-                <button class="chat-option" type="button" data-answer="about">Who are you?</button>
+                <button class="chat-option" type="button" data-answer="services">What services do you offer?</button>
+                <button class="chat-option" type="button" data-answer="availability">Are you available for freelance work?</button>
                 <button class="chat-option" type="button" data-answer="projects">What projects have you built?</button>
-                <button class="chat-option" type="button" data-answer="skills">What are your skills?</button>
-                <button class="chat-option" type="button" data-answer="resume">Can I see your resume?</button>
+                <button class="chat-option" type="button" data-answer="skills">What are your core skills?</button>
+                <button class="chat-option" type="button" data-answer="resume">Can I view your resume?</button>
                 <button class="chat-option" type="button" data-answer="contact">How can I contact you?</button>
+                <button class="chat-option" type="button" data-answer="pricing">Do you work on a fixed-price or hourly basis?</button>
             </div>
         </section>
         <button class="chat-widget-toggle" id="chatToggle" type="button" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">💬</button>
@@ -100,11 +102,13 @@
         try { const storedTheme = localStorage.getItem('theme'); if (storedTheme === 'light') body.classList.add('light-mode'); themeToggle.setAttribute('aria-pressed', String(body.classList.contains('light-mode'))); themeToggle.addEventListener('click', () => { body.classList.toggle('light-mode'); const isLight = body.classList.contains('light-mode'); themeToggle.setAttribute('aria-pressed', String(isLight)); localStorage.setItem('theme', isLight ? 'light' : 'dark'); }); } catch (error) { themeToggle.addEventListener('click', () => body.classList.toggle('light-mode')); }
         const chatWidget = document.getElementById('chatWidget'); const chatToggle = document.getElementById('chatToggle'); const chatPanel = document.getElementById('chatPanel'); const chatAnswer = document.getElementById('chatAnswer');
         const answers = {
-            about: 'I’m Sudhanshu Bhardwaj, a product-minded creative developer who builds polished, useful digital experiences.',
-            projects: 'I’ve built Universal Connector AI, an AI-powered workflow and product discovery platform, and a Product Thinking System case study. See the Selected Work section for details.',
-            skills: 'My focus areas include AI products, web design, frontend development, UX, and turning product ideas into clear, user-centered interfaces.',
-            resume: 'You can download my resume using the Resume button on my profile card.',
-            contact: 'You can reach me by email at programmer.cs03@gmail.com or send a WhatsApp message using the button below.'
+            services: 'I help with portfolio websites, landing pages, product UI design, frontend implementation, AI-driven web experiences, and clean digital experiences for startups and personal brands.',
+            availability: 'Yes — I am available for freelance and contract work, especially for creative web projects, product pages, and polished frontend builds.',
+            projects: 'I have worked on AI-powered web experiences and product-focused UI concepts, including Universal Connector AI and a Product Thinking System case study.',
+            skills: 'My core strengths are AI product thinking, web design, frontend development, UX strategy, rapid prototyping, and turning ideas into production-ready interfaces.',
+            resume: 'You can download my resume from the Resume button on the profile card, or connect with me directly on WhatsApp for a quick conversation.',
+            contact: 'You can reach me by email at programmer.cs03@gmail.com or directly on WhatsApp using the floating WhatsApp button.',
+            pricing: 'I can discuss project scope and pricing based on the deliverables, timeline, and complexity—either as a fixed project quote or a flexible hourly engagement.'
         };
         function setChatOpen(isOpen) { chatWidget.classList.toggle('is-open', isOpen); chatToggle.setAttribute('aria-expanded', String(isOpen)); chatToggle.setAttribute('aria-label', isOpen ? 'Close chat' : 'Open chat'); chatPanel.setAttribute('aria-hidden', String(!isOpen)); if (isOpen) document.querySelector('.chat-option').focus(); }
         chatToggle.addEventListener('click', () => setChatOpen(!chatWidget.classList.contains('is-open')));
