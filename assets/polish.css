@@ -48,3 +48,99 @@
         max-height: min(72dvh, 560px);
     }
 }
+
+/* Compact floating WhatsApp button; constrain the SVG's intrinsic size too. */
+a.whatsapp-toggle {
+    position: fixed !important;
+    right: max(20px, env(safe-area-inset-right)) !important;
+    bottom: max(20px, env(safe-area-inset-bottom)) !important;
+    z-index: 999 !important;
+    box-sizing: border-box !important;
+    width: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+    background: #25d366 !important;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, .35) !important;
+    text-decoration: none !important;
+}
+
+a.whatsapp-toggle svg {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
+    fill: currentColor !important;
+}
+
+.whatsapp-toggle-label {
+    position: absolute !important;
+    right: 58px !important;
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: #fff;
+    background: #132234;
+    font: 600 12px/1.2 Inter, system-ui, sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(5px);
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.whatsapp-toggle:hover .whatsapp-toggle-label,
+.whatsapp-toggle:focus-visible .whatsapp-toggle-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.whatsapp-toggle:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    a.whatsapp-toggle {
+        right: max(16px, env(safe-area-inset-right)) !important;
+        bottom: max(16px, env(safe-area-inset-bottom)) !important;
+        width: 44px !important;
+        min-width: 44px !important;
+        max-width: 44px !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
+    }
+
+    a.whatsapp-toggle svg {
+        width: 22px !important;
+        min-width: 22px !important;
+        max-width: 22px !important;
+        height: 22px !important;
+        min-height: 22px !important;
+        max-height: 22px !important;
+    }
+
+    .whatsapp-toggle-label {
+        right: 52px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .whatsapp-toggle,
+    .whatsapp-toggle-label {
+        transition-duration: 0.01ms !important;
+    }
+}
