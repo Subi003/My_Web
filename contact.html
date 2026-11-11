@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Contact Sudhanshu Bhardwaj about a project or collaboration.">
+  <title>Contact | Sudhanshu Bhardwaj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+  <main class="contact-shell">
+    <header class="contact-header">
+      <a class="contact-brand" href="index.html" aria-label="Back to Sudhanshu's portfolio"><span class="brand-mark" aria-hidden="true">SB</span><span>Sudhanshu</span></a>
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+    </header>
+
+    <section class="contact-card" aria-labelledby="contact-title">
+      <p class="eyebrow">Let’s work together</p>
+      <h1 id="contact-title">Tell me about your project.</h1>
+      <p class="intro">Share a few details and your email app will open with a message ready to send. Your details stay in your browser until then.</p>
+
+      <form id="contactForm" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="contactName">Name <span aria-hidden="true">*</span></label>
+            <input id="contactName" name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required>
+            <small class="field-error" id="nameError"></small>
+          </div>
+          <div class="field">
+            <label for="contactEmail">Email <span aria-hidden="true">*</span></label>
+            <input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
+            <small class="field-error" id="emailError"></small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="projectType">What can I help with?</label>
+          <select id="projectType" name="projectType">
+            <option value="">Choose a project type</option>
+            <option>Portfolio or landing page</option>
+            <option>Product UI / frontend</option>
+            <option>AI or workflow experience</option>
+            <option>Other collaboration</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="contactMessage">Project details <span aria-hidden="true">*</span></label>
+          <textarea id="contactMessage" name="message" rows="6" minlength="10" maxlength="3000" required placeholder="What are you building, and how can I help?"></textarea>
+          <div class="field-foot"><small class="field-error" id="messageError"></small><small id="messageCount">0 / 3000</small></div>
+        </div>
+
+        <div class="honeypot" aria-hidden="true">
+          <label for="companyWebsite">Leave this field empty</label>
+          <input id="companyWebsite" name="companyWebsite" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="submit-button" type="submit">Prepare email <span aria-hidden="true">→</span></button>
+        <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="contact-fallback">Prefer a direct message? <a href="mailto:programmer.cs03@gmail.com">Email me</a> or <a href="https://wa.me/917668690613" target="_blank" rel="noopener noreferrer">message me on WhatsApp</a>.</p>
+    </section>
+    <footer>© 2026 Sudhanshu Bhardwaj</footer>
+  </main>
+  <script src="contact-form.js" defer></script>
+</body>
+</html>
