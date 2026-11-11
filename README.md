@@ -17,4 +17,3 @@ Open `index.html` in a browser, or visit the live site if it is deployed through
 - `index.html` — portfolio page
 - `Sudhanshu_Bhardwaj_Resume.pdf` — downloadable resume
 - `assets/` — website assets
-
